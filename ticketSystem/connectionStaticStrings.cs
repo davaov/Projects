@@ -8,7 +8,6 @@ namespace ticketSystem
 {
     class connectionStaticStrings
     {
-        //public static string connectionstr = @"Data Source=DESKTOP-793DC9A\SQLEXPRESS; Initial Catalog = ticketSystem; Integrated Security = True";
-        public static string connectionstr = @"Server=DESKTOP-793DC9A\SQLEXPRESS;Database=master;Trusted_Connection=True;";
+        public static string connectionstr = @"Data Source=DESKTOP-793DC9A\SQLEXPRESS; Initial Catalog = ticketSystem; Integrated Security = True";
     }
 }
