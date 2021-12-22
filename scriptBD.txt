@@ -1,0 +1,251 @@
+USE [master]
+GO
+/****** Object:  Database [ticketSystem]    Script Date: 22.12.2021 23:50:12 ******/
+CREATE DATABASE [ticketSystem]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'ticketSystem', FILENAME = N'D:\SQL\MSSQL15.MSSQLSERVER\MSSQL\DATA\ticketSystem.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'ticketSystem_log', FILENAME = N'D:\SQL\MSSQL15.MSSQLSERVER\MSSQL\DATA\ticketSystem_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [ticketSystem] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [ticketSystem].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [ticketSystem] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [ticketSystem] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [ticketSystem] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [ticketSystem] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [ticketSystem] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [ticketSystem] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [ticketSystem] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [ticketSystem] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [ticketSystem] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [ticketSystem] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [ticketSystem] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [ticketSystem] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [ticketSystem] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [ticketSystem] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [ticketSystem] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [ticketSystem] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [ticketSystem] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [ticketSystem] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [ticketSystem] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [ticketSystem] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [ticketSystem] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [ticketSystem] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [ticketSystem] SET RECOVERY FULL 
+GO
+ALTER DATABASE [ticketSystem] SET  MULTI_USER 
+GO
+ALTER DATABASE [ticketSystem] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [ticketSystem] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [ticketSystem] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [ticketSystem] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [ticketSystem] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'ticketSystem', N'ON'
+GO
+ALTER DATABASE [ticketSystem] SET QUERY_STORE = OFF
+GO
+USE [ticketSystem]
+GO
+/****** Object:  Table [dbo].[Event]    Script Date: 22.12.2021 23:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Event](
+	[event_id] [int] NOT NULL,
+	[category_id] [int] NOT NULL,
+	[event_name] [nchar](30) NOT NULL,
+	[place_id] [int] NOT NULL,
+	[date] [date] NOT NULL,
+	[time] [time](7) NOT NULL,
+	[tickets_count] [int] NULL,
+	[event_status] [bit] NOT NULL,
+ CONSTRAINT [PK_Event] PRIMARY KEY CLUSTERED 
+(
+	[event_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Event_category]    Script Date: 22.12.2021 23:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Event_category](
+	[category_id] [int] NOT NULL,
+	[category_name] [nchar](20) NOT NULL,
+ CONSTRAINT [PK_Event_category] PRIMARY KEY CLUSTERED 
+(
+	[category_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Order]    Script Date: 22.12.2021 23:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Order](
+	[order_id] [int] NOT NULL,
+	[ticket_id] [int] NOT NULL,
+	[discount] [float] NOT NULL,
+	[cost] [float] NOT NULL,
+	[date] [date] NOT NULL,
+	[time] [time](7) NOT NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[order_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Places]    Script Date: 22.12.2021 23:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Places](
+	[place_id] [int] NOT NULL,
+	[place_name] [nchar](20) NOT NULL,
+	[city] [nchar](20) NOT NULL,
+	[adress] [nchar](50) NOT NULL,
+ CONSTRAINT [PK_Places] PRIMARY KEY CLUSTERED 
+(
+	[place_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 22.12.2021 23:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[role_id] [int] NOT NULL,
+	[role_name] [nchar](10) NOT NULL,
+ CONSTRAINT [PK_Roles] PRIMARY KEY CLUSTERED 
+(
+	[role_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Tickets]    Script Date: 22.12.2021 23:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tickets](
+	[ticket_id] [int] NOT NULL,
+	[event_id] [int] NOT NULL,
+	[row] [int] NOT NULL,
+	[seat] [int] NOT NULL,
+	[ticket_category] [int] NULL,
+ CONSTRAINT [PK_Tickets] PRIMARY KEY CLUSTERED 
+(
+	[ticket_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Tickets_category]    Script Date: 22.12.2021 23:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tickets_category](
+	[category_id] [int] NOT NULL,
+	[cost] [float] NOT NULL,
+ CONSTRAINT [PK_Tickets_category] PRIMARY KEY CLUSTERED 
+(
+	[category_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 22.12.2021 23:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[user_id] [int] NOT NULL,
+	[login] [nchar](10) NOT NULL,
+	[password] [nchar](20) NOT NULL,
+	[role_id] [int] NOT NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[user_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Index [IX_Tickets_category]    Script Date: 22.12.2021 23:50:12 ******/
+CREATE NONCLUSTERED INDEX [IX_Tickets_category] ON [dbo].[Tickets_category]
+(
+	[category_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Event]  WITH CHECK ADD  CONSTRAINT [FK_Event_Event_category] FOREIGN KEY([category_id])
+REFERENCES [dbo].[Event_category] ([category_id])
+GO
+ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_Event_category]
+GO
+ALTER TABLE [dbo].[Event]  WITH CHECK ADD  CONSTRAINT [FK_Event_Places] FOREIGN KEY([place_id])
+REFERENCES [dbo].[Places] ([place_id])
+GO
+ALTER TABLE [dbo].[Event] CHECK CONSTRAINT [FK_Event_Places]
+GO
+ALTER TABLE [dbo].[Order]  WITH CHECK ADD  CONSTRAINT [FK_Order_Tickets] FOREIGN KEY([ticket_id])
+REFERENCES [dbo].[Tickets] ([ticket_id])
+GO
+ALTER TABLE [dbo].[Order] CHECK CONSTRAINT [FK_Order_Tickets]
+GO
+ALTER TABLE [dbo].[Tickets]  WITH CHECK ADD  CONSTRAINT [FK_Tickets_Event] FOREIGN KEY([event_id])
+REFERENCES [dbo].[Event] ([event_id])
+GO
+ALTER TABLE [dbo].[Tickets] CHECK CONSTRAINT [FK_Tickets_Event]
+GO
+ALTER TABLE [dbo].[Tickets]  WITH CHECK ADD  CONSTRAINT [FK_Tickets_Tickets_category] FOREIGN KEY([ticket_category])
+REFERENCES [dbo].[Tickets_category] ([category_id])
+GO
+ALTER TABLE [dbo].[Tickets] CHECK CONSTRAINT [FK_Tickets_Tickets_category]
+GO
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Users_Roles] FOREIGN KEY([role_id])
+REFERENCES [dbo].[Roles] ([role_id])
+GO
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_Users_Roles]
+GO
+USE [master]
+GO
+ALTER DATABASE [ticketSystem] SET  READ_WRITE 
+GO
