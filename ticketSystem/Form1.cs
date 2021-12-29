@@ -18,7 +18,7 @@ namespace ticketSystem
             InitializeComponent();
         }
         SqlConnection connection = new SqlConnection();
-
+        Admin adm = new Admin();
         private void Form1_Load(object sender, EventArgs e)
         {
             connection.ConnectionString = connectionStaticStrings.connectionstr;
@@ -46,6 +46,11 @@ namespace ticketSystem
                 if (connection.State == ConnectionState.Open)
                     connection.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            adm.addNewUser("test1", "test1", 1);
         }
     }
 }
