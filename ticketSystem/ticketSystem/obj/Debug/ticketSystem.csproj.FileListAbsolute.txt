@@ -1,0 +1,14 @@
+D:\Проекты VS\ticketSystem\ticketSystem\obj\Debug\ticketSystem.csproj.AssemblyReference.cache
+D:\Проекты VS\ticketSystem\ticketSystem\obj\Debug\ticketSystem.Form1.resources
+D:\Проекты VS\ticketSystem\ticketSystem\obj\Debug\ticketSystem.Properties.Resources.resources
+D:\Проекты VS\ticketSystem\ticketSystem\obj\Debug\ticketSystem.csproj.GenerateResource.cache
+D:\Проекты VS\ticketSystem\ticketSystem\obj\Debug\ticketSystem.csproj.CoreCompileInputs.cache
+D:\Проекты VS\ticketSystem\ticketSystem\bin\Debug\ticketSystem.exe
+D:\Проекты VS\ticketSystem\ticketSystem\bin\Debug\ticketSystem.pdb
+D:\Проекты VS\ticketSystem\ticketSystem\obj\Debug\ticketSystem.exe
+D:\Проекты VS\ticketSystem\ticketSystem\obj\Debug\ticketSystem.pdb
+D:\Проекты VS\ticketSystem\ticketSystem\bin\Debug\EntityFramework.dll
+D:\Проекты VS\ticketSystem\ticketSystem\bin\Debug\EntityFramework.SqlServer.dll
+D:\Проекты VS\ticketSystem\ticketSystem\bin\Debug\EntityFramework.xml
+D:\Проекты VS\ticketSystem\ticketSystem\bin\Debug\EntityFramework.SqlServer.xml
+D:\Проекты VS\ticketSystem\ticketSystem\obj\Debug\ticketSystem.csproj.CopyComplete
